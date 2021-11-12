@@ -1,0 +1,138 @@
+﻿@model FitnessStore.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<!-- Page info -->
+<div class="page-top-info">
+    <div class="container">
+        <h4>Product Page</h4>
+        <div class="site-pagination">
+            <a asp-action="Index" asp-controller="Home">Home</a> /
+            <a asp-action="Store" asp-controller="Categories" asp-route-id="1" >Shop</a>
+        </div>
+    </div>
+</div>
+<!-- Page info end -->
+<!-- product section -->
+<section class="product-section">
+    <div class="container">
+        <div class="back-link">
+            <a asp-action="Store" asp-controller="Categories" asp-route-id="@Model.Category.Id"> &lt;&lt; Back to Category</a>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product-pic-zoom">
+                    @if (Model.Image != null)
+                    {
+                        String img = Convert.ToBase64String(Model.Image);
+                        <img src="data:image/png;base64,@img" height="500" />
+                    }
+                    else
+                    { 
+                        String pathToImage = "~/img/single-product/" + Model.Name.Trim() + ".jpg";
+                        <img src="@pathToImage" alt="">
+                    }
+                </div>
+            </div>
+            <div class="col-lg-6 product-details">
+                <h2 class="p-title">@Html.DisplayFor(model => model.Name)</h2>
+                <h3 class="p-price">$@Html.DisplayFor(model => model.Price),00</h3>
+                <h4 class="p-stock">Available: <span>In Stock</span></h4>
+                @*<div class="p-review">
+                        <a href="">3 reviews</a>|<a href="">Add your review</a>
+                    </div>*@
+                <form id="AddCartForm">
+                    <input hidden id="productId" name="productId" type="text" value="@Model.Id">
+                    <div class="quantity">
+                        <p>Quantity</p>
+                        <div class="pro-qty"><input id="quantity" name="quantity" type="text" value="1"></div>
+                    </div>
+                    <input type="submit" value="ADD TO CART" class="site-btn">
+                </form>
+                <div id="accordion" class="accordion-area">
+                    <div class="panel">
+                        <div class="panel-header" id="headingOne">
+                            <button class="panel-link active" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">information</button>
+                        </div>
+                        <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="panel-body">
+                                <p>@Html.DisplayFor(model => model.Description).</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header" id="headingTwo">
+                            <button class="panel-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">care details </button>
+                        </div>
+                        <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="panel-body">
+                                <img src="~/img/cards.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header" id="headingThree">
+                            <button class="panel-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">shipping & Returns</button>
+                        </div>
+                        <div id="collapse3" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="panel-body">
+                                <h4>7 Days Returns</h4>
+                                <p>Cash on Delivery Available<br>Home Delivery <span>3 - 4 days</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- product section end -->
+<!-- RELATED PRODUCTS section -->
+<section class="related-product-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>RELATED PRODUCTS</h2>
+        </div>
+        <div class="product-slider owl-carousel">
+
+            @{ var products = (IEnumerable<FitnessStore.Models.Product>)ViewData["RelatedProducts"]; }
+            @if (products != null)
+            {
+                @foreach (var product in products)
+                {
+                    <div class="product-item">
+                        <div class="pi-pic">
+                            <a asp-action="ProductDetails" asp-controller="Products" asp-route-id="@product.Id">
+                                @if (product.Image != null)
+                                {
+                                    String img = Convert.ToBase64String(product.Image);
+                                    <img src="data:image/png;base64,@img" />
+                                }
+                                else
+                                {
+                                    String pathToimage = "~/img/single-product/" + product.Name.Trim() + ".jpg";
+                                    <img src="@pathToimage" alt="">
+                                }
+                            </a>
+                            <div class="pi-links" id="@product.Id">
+                                <a class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>                                @*<a class="link-product-add-cart" asp-action="ProductDetails" asp-controller="Products" asp-route-id="@product.Id">Details</a>*@
+
+                            </div>
+                        </div>
+                        <div class="pi-text">
+                            <h6>$@product.Price,00</h6>
+                            <p>@product.Name </p>
+                        </div>
+                    </div>
+
+                }
+            }
+
+        </div>
+    </div>
+</section>
+<!-- RELATED PRODUCTS section end -->

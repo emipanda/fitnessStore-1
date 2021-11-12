@@ -1,0 +1,337 @@
+﻿
+@*<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FitnessStore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FitnessStore</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - FitnessStore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>*@
+
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>Fitness Store - @ViewData["Title"]</title>
+    <meta charset="UTF-8">
+    <meta name="description" content=" FS | eCommerce">
+    <meta name="keywords" content="FS, eCommerce, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link href="~/img/favicon.ico" rel="shortcut icon" />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/flaticon.css" />
+    <link rel="stylesheet" href="~/css/slicknav.min.css" />
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/css/animate.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @*<link rel="stylesheet" href="~/AboutUs/css/AboutUs.css" />*@
+
+
+    <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header section -->
+    <header class="header-section">
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 text-center text-lg-left">
+                        <!-- logo -->
+                        <a asp-action="Index" asp-controller="Home" class="site-logo">
+                            <img src="~/img/logo2.png" alt="">
+                        </a>
+                    </div>
+                    <div class="col-xl-6 col-lg-5">
+                        <form asp-action="SearchProducts" asp-controller="Products" class="header-search-form">
+                            <input name="term" id="searchBox" type="text" placeholder="Search for product ....">
+                            <button><i class="flaticon-search"></i></button>
+                        </form>
+                    </div>
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="user-panel">
+                            @{ var name = Context.User.Claims.FirstOrDefault(c => c.Type == "Name")?.Value;
+                                if (name != null)
+                                {
+                                    <div class="up-item">
+                                        <i class="flaticon-profile"></i>
+                                        <span>@name</span>
+                                    </div>
+                                    <div class="up-item">
+                                        <div class="shopping-card">
+                                            <i class="flaticon-bag"></i>
+                                            @*<span>0</span>*@
+                                        </div>
+                                        <a asp-action="CartDetails" asp-controller="Carts">Shopping Cart</a> &nbsp; &nbsp;
+                                    </div>
+                                    <div class="up-item">
+                                        <i class="flaticon-logout"></i>
+                                        <a asp-action="LogOut" asp-controller="Accounts">Log Out</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="up-item">
+                                        <i class="flaticon-profile"></i>
+                                        <a asp-action="Login" asp-controller="Accounts">Sign In</a><span> or </span><a asp-action="Register" asp-controller="Accounts">Create Account</a>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="main-navbar">
+            <div class="container">
+                <!-- menu -->
+                <ul class="main-menu">
+                    <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                    <li>
+                        <a asp-action="Store" asp-controller="Categories" asp-route-id="1">Store</a>
+                        <!--<ul class="sub-menu">-->
+                        @*<li><a href="#">Outdoors and Camping</a></li>
+                            <li><a href="#">Gadgets</a></li>
+                            <li><a href="#">Baby Essentials</a></li>
+                            <li><a href="#">Convenience</a></li>
+                            <li><a href="#">Sports Accessories</a></li>*@
+                        <!--</ul>-->
+                    </li>
+                    <li><a asp-action="AboutUs" asp-controller="Home">About us</a></li>
+                    <li><a asp-action="Contact" asp-controller="Contacts">Contact us</a></li>
+                    @{ var role = Context.User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value;
+                        if (role == "Admin")
+                        {
+                            <li><a asp-action="Tables" asp-controller="AdminPanels">Admin Panel</a></li>
+                        }
+                    }
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Header section end -->
+
+    @RenderBody()
+
+    <!-- Footer section -->
+<section class="footer-section">
+    <div class="container">
+        <div class="footer-logo text-center">
+            <a asp-action="Index" asp-controller="Home"><img src="~/img/logo-light2.png" alt=""></a>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget about-widget">
+                    <h2>RESEARCH AND DEVELOPMENT</h2>
+                    <p>
+                        With us, the customer is always at the heart of the work. In the spirit of this approach, we observe athletes during their activities and listen to them, so that our sales people, production managers, designers and engineers can imagine the products of tomorrow. Products that will contribute to the training, comfort, enjoyment and safety of end users. Thanks to the opinions of customers, we are able to continue to develop existing products or imagine future innovations.
+                    </p>
+                    <img src="~/img/cards.png" alt="">
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget about-widget">
+                    <h2>PRODUCT QUALITY</h2>
+                    <p>For 40 years, our design and production teams have not compromised on quality! Together with professional focus groups we test the products in the labs before they go out to the stores. This process makes it possible to achieve the best quality control. Our main goal is to make the pursuit of sports easy, accessible and create an innovative and interesting experience through our products.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-sm-6">
+                <div class="footer-widget about-widget">
+                    <h2>Like Our Facebook Page</h2>
+                    <body>
+                        <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FFitnessHuber&width=140&layout=button_count&action=like&size=large&share=true&height=46&locale=en_US&appId"
+                                width="155"
+                                height="46"
+                                style="border:none;overflow:hidden"
+                                scrolling="no"
+                                frameborder="0"
+                                allowTransparency="true"
+                                allow="encrypted-media">
+                        </iframe>
+                    </body>
+
+                    @*<body>
+                    <div id="fb-root"></div>
+                    <script async defer crossorigin="anonymous"
+                            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0"
+                            nonce="d3JDDkDF">
+                    </script>
+
+                    <div class="fb-like"
+                         data-href="https://www.facebook.com/&#x5d9;&#x5d5;&#x5e1;&#x5d9;-&#x5e1;&#x5e8;&#x5d5;&#x5e8;-&#x5d4;&#x5e2;&#x5de;&#x5d5;&#x5d3;-&#x5d4;&#x5e8;&#x5e9;&#x5de;&#x5d9;-314341605272549"
+                         data-width=""
+                         data-layout="box_count"
+                         data-action="like"
+                         data-size="large"
+                         data-share="true">
+                    </div>
+                </body>*@
+
+                    @*<ul>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">Track Orders</a></li>
+                    <li><a href="">Returns</a></li>
+                    <li><a href="">Jobs</a></li>
+                    <li><a href="">Shipping</a></li>
+                    <li><a href="">Blog</a></li>
+                </ul>
+                <ul>
+                    <li><a href="">Partners</a></li>
+                    <li><a href="">Bloggers</a></li>
+                    <li><a asp-action="Contact" asp-controller="Contacts">Support</a></li>
+                    <li><a href="">Terms of Use</a></li>
+                    <li><a href="">Press</a></li>
+                </ul>*@
+                </div>
+            </div>
+            @*<div class="col-lg-3 col-sm-6">
+        <div class="footer-widget about-widget">
+            <h2>Questions</h2>
+            <div class="fw-latest-post-widget">
+                <div class="lp-item">*@
+            @*<div class="lp-thumb set-bg" data-setbg="~/img/blog-thumbs/1.jpg"></div>*@
+            @*<div class="lp-content">
+                <h6>what shoes to wear</h6>
+                <span>Oct 21, 2018</span>
+                <a href="#" class="readmore">Read More</a>
+            </div>
+        </div>
+        <div class="lp-item">*@
+            @*<div class="lp-thumb set-bg" data-setbg="~/img/blog-thumbs/2.jpg"></div>*@
+            @*<div class="lp-content">
+                            <h6>trends this year</h6>
+                            <span>Oct 21, 2018</span>
+                            <a href="#" class="readmore">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+            @*<div class="col-lg-3 col-sm-6">
+            <div class="footer-widget contact-widget">
+                <h2>Questions</h2>
+                <div class="con-info">
+                    <span>C.</span>
+                    <p>Your Company Ltd </p>
+                </div>
+                <div class="con-info">
+                    <span>B.</span>
+                    <p>1481 Creekside Lane  Avila Beach, CA 93424, P.O. BOX 68 </p>
+                </div>
+                <div class="con-info">
+                    <span>T.</span>
+                    <p>+53 345 7953 32453</p>
+                </div>
+                <div class="con-info">
+                    <span>E.</span>
+                    <p>office@youremail.com</p>
+                </div>
+            </div>
+        </div>*@
+        </div>
+        </div>
+   
+    @*<div class="social-links-warp">
+            <div class="container">
+                <div class="social-links">
+                    <a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
+                    <a href="" class="google-plus"><i class="fa fa-google-plus"></i><span>g+plus</span></a>
+                    <a href="" class="pinterest"><i class="fa fa-pinterest"></i><span>pinterest</span></a>
+                    <a href="" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
+                    <a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>
+                    <a href="" class="youtube"><i class="fa fa-youtube"></i><span>youtube</span></a>
+                    <a href="" class="tumblr"><i class="fa fa-tumblr-square"></i><span>tumblr</span></a>
+                </div>
+
+                Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+              
+                <p class="text-white text-center mt-5">
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                </p>
+
+                Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+
+            </div>
+        </div>*@
+</section>
+    <!-- Footer section end -->
+
+
+    <!--====== Javascripts & Jquery ======-->
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.slicknav.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/jquery.nicescroll.min.js"></script>
+    <script src="~/js/jquery.zoom.min.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/Products/search.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/js/Cart/AddToCart.js"></script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+﻿@model IEnumerable<FitnessStore.Models.Product>
+
+@{
+    ViewData["Title"] = "Store";
+}
+
+<!-- Page info -->
+<div class="page-top-info">
+    <div class="container">
+        <h4>CAtegory PAge</h4>
+        <div class="site-pagination">
+            <a asp-action="Index" asp-controller="Home">Home</a> /
+            <a asp-action="Categories" asp-controller="Store">Shop</a> /
+        </div>
+    </div>
+</div>
+<!-- Page info end -->
+<!-- Category section -->
+<section class="category-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 order-2 order-lg-1">
+                <div class="filter-widget">
+                    <h2 class="fw-title">Categories</h2>
+                    <ul class="category-menu">
+                        @foreach (var category in ViewBag.Categories)
+                        {
+                            <li>
+                                <a asp-action="Store" asp-controller="Categories" asp-route-id="@category.Id">@category.Name</a>
+                                @*<ul class="sub-menu">
+                                        <li><a href="#">Midi Dresses <span>(2)</span></a></li>
+                                        <li><a href="#">Maxi Dresses<span>(56)</span></a></li>
+                                        <li><a href="#">Prom Dresses<span>(36)</span></a></li>
+                                        <li><a href="#">Little Black Dresses <span>(27)</span></a></li>
+                                        <li><a href="#">Mini Dresses<span>(19)</span></a></li>
+                                    </ul>*@
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="filter-widget mb-0">
+                    <h2 class="fw-title">refine by</h2>
+                    <div class="price-range-wrap">
+                        <h4>Price</h4>
+                        <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="0" data-max="1000">
+                            <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 100%;"></div>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 0%;">
+                            </span>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;">
+                            </span>
+                        </div>
+                        <div class="range-slider">
+                            @*<form asp-action="SearchByPrice" asp-controller="Categories">*@
+                            <div class="price-input">
+                                <input type="text" name="minamount" id="minamount">
+                                <input type="text" name="maxamount" id="maxamount">
+                                <button id="filter-btn" class="site-btn">Filter</button>
+                            </div>
+                            @*</form>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
+                <div class="row" id="tbody">
+                    @foreach (var product in Model)
+                    {
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="product-item">
+                                <div class="pi-pic">
+                                    @*<div class="tag-sale">ON SALE</div>*@
+                                    <a asp-action="ProductDetails" asp-controller="Products" asp-route-id="@product.Id">
+                                        @if (product.Image != null)
+                                        {
+                                            String img = Convert.ToBase64String(product.Image);
+                                            <img src="data:image/png;base64,@img" alt="@Html.DisplayFor(model => product.Name)">
+                                        }
+                                        else
+                                        {
+                                            String trimResult = product.Name.Trim();
+                                            String pathToImage = "~/img/single-product/" + trimResult + ".jpg";
+                                            <img src="@pathToImage" alt="@Html.DisplayFor(model => product.Name)">
+                                        }
+                                    </a>
+                                </div>
+                                <div class="pi-text">
+                                    <a asp-action="ProductDetails" asp-controller="Products" asp-route-id="@product.Id">
+                                        <h6>$@Html.DisplayFor(model => product.Price),00</h6>
+                                        <p>@Html.DisplayFor(model => product.Name)</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<a href="/Products/ProductDetails/${id}">
+
+</a>
+
+
+<!-- Category section end -->
+@section Scripts {
+
+
+    <script src="~/js/Products/Filter.js"></script>
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+
+    <script id="results" type="text/html">
+
+        <div class="col-lg-4 col-sm-6">
+            <div class="product-item">
+                <div class="pi-pic">
+                    <a href="/Products/ProductDetails/${id}">
+                        <img src="data:image/png;base64,${image}" alt="${name}">
+                    </a>
+                </div>
+                <div class="pi-text">
+                    <h6>$ ${price},00</h6>
+                    <p>${name}</p>
+                </div>
+            </div>
+        </div>
+    </script>
+
+}

@@ -1,0 +1,32 @@
+﻿@model FitnessStore.Models.AdminPanel
+
+@{
+    Layout = "_Layout_AdminPanel";
+    ViewData["Title"] = "Admin Panel";
+}
+
+<!-- MAIN CONTENT-->
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            @{ ViewBag.Show = "true";}
+            @await Html.PartialAsync("../AdminPanels/Accounts/Index.cshtml", Model.Accounts)
+            @await Html.PartialAsync("../AdminPanels/Categories/Index.cshtml", Model.Categories)
+            @await Html.PartialAsync("../AdminPanels/Products/Index.cshtml", Model.Products)
+            @await Html.PartialAsync("../AdminPanels/Contacts/Index.cshtml", Model.Contacts)
+            @await Html.PartialAsync("../AdminPanels/Carts/Index.cshtml", Model.Carts)
+            @await Html.PartialAsync("../AdminPanels/CartItems/Index.cshtml", Model.CartItems)
+            @await Html.PartialAsync("../AdminPanels/Orders/Index.cshtml", Model.Orders)
+            @await Html.PartialAsync("../AdminPanels/OrderItems/Index.cshtml", Model.OrderItems)
+
+            @*<div class="row">
+                <div class="col-md-12">
+                    <div class="copyright">
+                        <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+    </div>
+</div>
+<!-- END MAIN CONTENT-->
