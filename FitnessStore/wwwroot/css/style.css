@@ -195,7 +195,7 @@ ol {
 	padding: 18px 47px 14px;
 	border-radius: 50px;
 	text-transform: uppercase;
-	background: #f51167;
+	background: #1acde6;
 	color: #fff;
 	line-height: normal;
 	cursor: pointer;
@@ -397,6 +397,7 @@ ol {
 
 .header-top {
 	padding: 18px 0 14px;
+	background-color: #535e5e;
 }
 
 .site-logo {
@@ -440,10 +441,10 @@ ol {
 	font-size: 22px;
 }
 
-.user-panel .up-item a {
-	font-size: 14px;
-	color: #000;
-}
+	.user-panel .up-item a {
+		font-size: 14px;
+		color: #6098b3;
+	}
 
 .user-panel .up-item:first-child {
 	margin-right: 29px;
@@ -518,7 +519,7 @@ ol {
 }
 
 .main-menu li:hover>a {
-	color: #f51167;
+	color: #1ad1eb;
 }
 
 .main-menu .sub-menu {
@@ -2176,8 +2177,8 @@ ol {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
-	margin-bottom: 85px;
-	padding-top: 20px;
+	margin-bottom: 50px;
+	/*padding-top: 20px;*/
 }
 
 .contact-social a {
@@ -2210,7 +2211,7 @@ ol {
 
 .contact-form input,
 .contact-form textarea {
-	width: 100%;
+	width: 590px;
 	height: 44px;
 	border: none;
 	padding: 0 18px;

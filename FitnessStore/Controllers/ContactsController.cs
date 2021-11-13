@@ -31,11 +31,12 @@ namespace FitnessStore.Controllers
         [ValidateAntiForgeryToken]
         public void SendEmail(string Email, string Name)
         {
-            var fromAddress = new MailAddress("FitnessStore4@gmail.com", "LCP Store");
-            var toAddress = new MailAddress(Email, Name);
-            const string fromPassword = "LCP12345678";
-            const string subject = "Thank you for contacting LCP";
-            const string body = "Thank you for contacting LCP support";
+            
+            var fromAddress = new MailAddress("fitnesshubstoretlv@gmail.com");
+            var toAddress = new MailAddress(Email);
+            const string fromPassword = "1qaz!QAZ2wsx@WSX";
+            const string subject = "Hello from fitnessHubStoreTLV";
+            const string body = "Thank you for contacting fitnessHubStoreTLV support";
 
             var smtp = new SmtpClient
             {
@@ -44,17 +45,18 @@ namespace FitnessStore.Controllers
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, fromPassword),
+                Credentials = new NetworkCredential("fitnesshubstoretlv@gmail.com", fromPassword),
                 Timeout = 20000
             };
+            
             using (var message = new MailMessage(fromAddress, toAddress)
             {
                 Subject = subject,
                 Body = body
             })
-            {
+            
                 smtp.Send(message);
-            }
+            
         }
 
         // GET: Contacts/Create

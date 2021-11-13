@@ -25,6 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Extensions" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
@@ -38,6 +42,8 @@
   <ItemGroup>
     <Folder Include="Views\AdminPanels\Categories\" />
     <Folder Include="wwwroot\AdminPanel\" />
+    <Folder Include="wwwroot\img\blog-thumbs\" />
+    <Folder Include="wwwroot\img\cart\" />
     <Folder Include="wwwroot\js\Order\" />
   </ItemGroup>
 

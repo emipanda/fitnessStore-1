@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,11 @@ using FitnessStore.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using System.Security.Cryptography.X509Certificates;
+using System.IO;
 
 namespace FitnessStore
 {
@@ -28,6 +34,7 @@ namespace FitnessStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllersWithViews();
 
             services.AddDbContext<FitnessStoreContext>(options =>
@@ -36,13 +43,15 @@ namespace FitnessStore
             services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(2));
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
-
+            
+           
             services.AddOptions<CookieAuthenticationOptions>(
                     CookieAuthenticationDefaults.AuthenticationScheme)
             .Configure((options) =>
             {
                 options.LoginPath = "/Accounts/Login";
             });
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
