@@ -402,23 +402,6 @@ namespace FitnessStore.Controllers
             return View("~/Views/AdminPanels/Contacts/Create.cshtml");
         }
 
-        // POST: Contacts/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ContactCreate([Bind("Id,Name,Email,Subject,Body")] Contact contact)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(contact);
-                await _context.SaveChangesAsync();
-                RedirectToAction("SendEmail", "Contacts", new { contact.Email, contact.Name });
-                return RedirectToAction(nameof(Tables));
-            }
-            return View("~/Views/AdminPanels/Contacts/Create.cshtml", contact);
-        }
-
         // GET: Contacts/Edit/5
         public async Task<IActionResult> ContactEdit(int? id)
         {
